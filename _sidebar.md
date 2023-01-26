@@ -5,5 +5,6 @@
     * [Получение данных из файла](/Developers/DataSourse.md)
     * [Алгоритм Ланцоша](/Developers/LanczosAlgoritm.md)
     * [Команды](/Developers/Commands.md)
-    * [Оптимизация топологии](/Developers/TopologyOptimization.md)
 * [Пользователю](Users/README.md)
+* [Тьюториалы](Tutorials/README.md)
+    * [Оптимизация топологии в COMSOL](/Tutorials/TopologyOptimization.md)
