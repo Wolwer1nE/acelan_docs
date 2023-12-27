@@ -4,6 +4,8 @@
     * [Получение данных из файла](/Developers/DataSourse.md)
     * [Алгоритм Ланцоша](/Developers/LanczosAlgoritm.md)
     * [Команды](/Developers/Commands.md)
+    * [Геометрия](/Developers/Geometry.md)
+    * [Библиотека материалов](/Developers/Materials.md)
     * [Оптимизация топологии методом ESO](/Developers/OptimizationESO.md)
     * [Оптимизация топологии в ACELAN](/Developers/Optimization.md)
     * [Тестирование в ACELAN](/Developers/Tests.md)
