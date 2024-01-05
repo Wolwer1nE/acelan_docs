@@ -53,5 +53,5 @@
 ### Тестирование
 
 Реализованы тесты TopOptTest.cs для модели пластины из пакета COMSOL ([Оптимизация топологии в COMSOL](/Tutorials/TopologyOptimization.md)). 
-Полученные результаты оптимизации хранятся в
-`acelan\Acelan.Tests\bin\Debug\net7.0\DataForTests` 
+Полученные результаты оптимизации хранятся в `acelan\Acelan.Tests\bin\Debug\net7.0\DataForTests`.
+Также данные об оптимизации вынесены в проект `acelan_data` в папку `topology_optimization`.
