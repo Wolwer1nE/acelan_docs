@@ -1,7 +1,7 @@
 ﻿* [Разработчику](/Developers/README.md)
     * [Сборка и запуск](/Developers/README.md)
     * [Работа с документацией](/Developers/Docs.md)
-    * [Получение данных из файла](/Developers/DataSourse.md)
+    * [Импорт и создание моделей](/Developers/DataSourse.md)
     * [Алгоритм Ланцоша](/Developers/LanczosAlgoritm.md)
     * [Геометрия](/Developers/Geometry.md)
     * [Библиотека материалов](/Developers/Materials.md)
