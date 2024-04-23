@@ -23,23 +23,23 @@
 - получение узлов по координатам (```GetNodesByCoordinate(Axis coord, double value, double tolerance = 10e-8)```)
 - получение списка всех узлов (```GetNodes()```)
 - получение узла по индексу (```GetNode(int index)```)
-- получение ребра по индексу (```GetEdge(int index)```) ___не используется___
+- получение ребра по индексу (```GetEdge(int index)```) 
 - получение грани по индексу (```GetFace(int index)```)
 - получение списка всех граней (```GetFaces()```)
 - получение объема по индексу (```GetVolume(int index)```)
 - получение списка всех тел (```GetBodies()```)
-- добавление узла в сетку (```InsertNode(Node n)```) ___не используется___
+- добавление узла в сетку (```InsertNode(Node n)```) 
 - получение количества узлов сетки (```CountNodes()```)
-- получение количества ребер сетки (```CountEdges()```) ___не используется___
+- получение количества ребер сетки (```CountEdges()```) 
 - получение количества граней сетки (```CountFaces()```)
 - получение количества объемов сетки (```CountVolumes()```)
 - получение количества объемов сетки в конкретном теле (```CountVolumes(int bodyNumber)```)
 - получение индексов узлов содержащихся в конкретной грани сетки(```GetNodesIndicesForFace(int index)```)
 - получение узлов содержащихся в конкретном элементе объема сетки  (```GetNodesForElement(int index)```) ___реализация___
-- получение узлов конкретного элемента сетки, для которых $X = position$ (```GeNodesForElementXAligned(int index, double position)```) ___название___
-- получение узлов конкретного элемента сетки, для которых $Y = position$ (```GeNodesForElementYAligned(int index, double position)```) ___название___
-- получение узлов конкретного элемента сетки, для которых $Z = position$ (```GeNodesForElementZAligned(int index, double position)```) ___название___
-- добавление средних узлов (```AddMiddleNodes()```) ___не реализован___
+- получение узлов конкретного элемента сетки, для которых $X = position$ (```GeNodesForElementXAligned(int index, double position)```)
+- получение узлов конкретного элемента сетки, для которых $Y = position$ (```GeNodesForElementYAligned(int index, double position)```)
+- получение узлов конкретного элемента сетки, для которых $Z = position$ (```GeNodesForElementZAligned(int index, double position)```) 
+- добавление средних узлов (```AddMiddleNodes()```) 
 - перенумерация узлов несвязных сеток по координатам (```ReenumByPosition()```)
 - поглучение глубины сетки (```GetDepth()```)
 
@@ -71,7 +71,7 @@
 - количество граней в одном объеме
 - пропорция сетки
 - масштаб сетки
-- глубина разьиения
+- глубина разбиения
 - информация о границах
 
 Пример задания свойств сетки:
