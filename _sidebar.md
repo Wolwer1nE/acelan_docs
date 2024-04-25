@@ -11,6 +11,7 @@
     * [Тестирование в ACELAN](/Developers/Tests.md)
     * [Видеоуроки](/Developers/VideoTutorials.md)
     * [Экспорт матриц](/Developers/MatrixExport.md)
+    * [Стержневые конечные элементы](/Developers/RodElements.md)
 * [Пользователю](/Users/README.md)
     * [Быстрый старт](/Users/)
     * [Команды](/Users/Commands.md)
