@@ -21,3 +21,4 @@
 * [Скрипты для ACELAN](/AcelanScripts/README.md)
     * [Поиск собственных значений скальпеля](/AcelanScripts/Scalpel.md)
     * [Оптимизация топологии](/AcelanScripts/Optimization.md)
+    * [Построение регулярных стержневых сеток](/AcelanScripts/RegularBars.md)
