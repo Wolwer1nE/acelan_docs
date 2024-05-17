@@ -55,3 +55,12 @@
     ```
     git pull
     ```
+
+5. Добавление в локальный репозиторий ветки master
+
+    ```
+    git checkout master
+    git pull origin master
+    git checkout [Имя ветки]
+    git merge master
+    ```
