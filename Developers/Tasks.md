@@ -50,7 +50,7 @@ solution = model.solve(CSparseLU)
 {
   "session": "tmp1",
   "taskName": "my task",
-  "type": "solve",
+  "type": "StaticProblem",
   "data": {
     "mesh": "http://127.0.0.1:5200/artifacts/block_mesh.nas",
     "material": { },
@@ -128,7 +128,7 @@ solution = material_identifier(material1, material2, method, mode, porosity)
 {
   "session": "tmp1",
   "task_name": "my task",
-  "type": "material_identifier",
+  "type": "IdentifierProblem",
   "data": {
     "material_1": {},
     "material_2": {},
@@ -152,7 +152,7 @@ solution = material_identifier(material1, material2, method, mode, porosity)
 }
 ```
 
-### Топологическая оптиимизация
+### Топологическая оптимизация
 
 ```
 mesh = "http://127.0.0.1:5200/artifacts/block_mesh.nas"
@@ -177,7 +177,7 @@ solution = model.topology_optimization(method, percentage)
 {
   "session": "tmp1",
   "taskName": "my task",
-  "type": "topology_optimization",
+  "type": "OptimizationProblem",
   "data": {
     "mesh": "http://127.0.0.1:5200/artifacts/block_mesh.nas",
     "material": { },
@@ -265,7 +265,7 @@ solution = model.eigenfrequency(count, around)
 {
   "session": "tmp1",
   "taskName": "my task",
-  "type": "eigenfrequency",
+  "type": "EigenProblem",
   "data": {
     "mesh": "http://127.0.0.1:5200/artifacts/block_mesh.nas",
     "material": {},
