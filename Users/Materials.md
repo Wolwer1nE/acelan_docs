@@ -33,8 +33,7 @@ $$
     \begin{array}{cccccc}
         0 & 0 & 0 & 0 & e_{15} & 0\\
         0 & 0 & 0 & e_{15} & 0 & 0\\
-        e_{31} & e_{31} & e_{33} & 0 & 0 & 0\\
-        
+        e_{31} & e_{31} & e_{33} & 0 & 0 & 0\\        
     \end{array} \right)
 $$
 
@@ -43,8 +42,8 @@ $$
     \varepsilon=\left(
     \begin{array}{cccccc}
         \varepsilon_{11} & 0 & 0 \\
-        0 & \varepsilon_{11} & 0\\
-        0 & 0 & \varepsilon_{33}\\       
+        0 & \varepsilon_{11} & 0 \\
+        0 & 0 & \varepsilon_{33} \\       
     \end{array} \right)
 $$
 
