@@ -170,6 +170,7 @@ data_source = OctreeDataSource.new(2)
 model = build_model(data_source, [body], [boundary_conditions]) 
 method = 'ESO'
 percentage = 50
+senseName = 'AverageStressSense'
 solution = model.topology_optimization(method, percentage)
 ```
 
@@ -185,7 +186,8 @@ solution = model.topology_optimization(method, percentage)
     "variables": ":ux, :uy",
     "elementType": ":triangle",
     "method": "ESO",
-    "percentage": 50
+    "percentage": 50,
+    "senseName": "AverageStressSense"
   },
   "callbackUrl": "http://127.0.0.1:3000/api/reports/"
 }
