@@ -1,7 +1,80 @@
 ## Задачи в пакете ACELAN
 
-### Формат описания материалов
+Для решения пользователем задач в пакете ACELAN реализован класс ```ProblemSolver```.
+От пользователя приходит строка в формате JSON, которая содержит информацию о скрипте ("ScriptInfo") пользователя и данные для его выполнения. 
+Для сериализации данных этой строки используется класс ```ScriptTask```. 
+После сериализации решается соответствующая "taskName" задача.
 
+Класс ```ScriptTask``` содержит в себе информацию о скрипте ("ScriptInfo") и данные для всех типов задач. 
+Необходимые для конкретной задачи данные выбираются в зависимости от имени задачи.
+
+```json
+"ScriptInfo": {
+  "session": "tmp1",
+  "taskName": "my task",
+  "taskType": "OptimizationProblem"
+}
+```
+
+Реализованы 4 типа задач:
+- Прямая задача
+- Идентификация материала
+- Топологическая оптимизация
+- Собственные значения модели
+
+Результатом решения задач является строка в формате JAM. Для десериализации используется класс Jam, а для формирования различных JAM используется класс ```JamBuilder```.
+
+#### JAM
+```json
+{
+  "properties": {
+    "elementType": "Triangle"
+  },
+  "nodes": [
+    {
+      "id": 0,
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "nodes": [
+        2,
+        1,
+        0
+      ],
+      "body": 0
+    }
+  ],
+  "nodalSolution": {
+    "ux": [],
+    "uy": [],
+    "uz": [],
+    "phi": []
+  },
+  "elementalSolution": {
+    "eps11": [],
+    "eps22": [],
+    "eps12": [],
+    "epsT": [],
+    "sigma11": [],
+    "sigma22": [],
+    "sigma12": [],
+    "sigmaT": []
+  },
+  "metaData": {
+    "version": "0.1.1",
+    "status": "Success",
+    "message": "",
+    "signature": "123"
+  }
+}
+```
+
+#### Формат описания материала
 ```json
 {
       "name": "PZT",
@@ -27,7 +100,19 @@
     }
 ```
 
-### Прямая задача
+#### Формат описания модели
+```json
+"DataModel": {
+  "mesh": "DataForTests/static_hex.nas",
+  "materials": [],
+  "boundaryConditions": [ "z = 0, ux = 0;\n z = 0, uy = 0;\n z = 0, uz = 0;\n PointLoad3(0, 0, 0.01, 0, 0, -1000);" ],
+  "variables": ":ux, :uy, :uz",
+  "elementType": ":hex"
+}
+```
+
+## Задачи:
+### 1. Прямая задача
 
 ```
 mesh = "http://127.0.0.1:5200/artifacts/block_mesh.nas"
@@ -48,17 +133,18 @@ solution = model.solve(CSparseLU)
 
 ```json
 {
-  "session": "tmp1",
-  "taskName": "my task",
-  "type": "StaticProblem",
-  "data": {
-    "mesh": "http://127.0.0.1:5200/artifacts/block_mesh.nas",
-    "material": { },
-    "boundaryConditions": "x = 0, ux = 0;\n y = 0, uy = 0;\n PointLoad(0.016,0.005,0,-1000)",
-    "variables": ":ux, :uy",
-    "elementType": ":triangle"
+  "ScriptInfo": {
+    "session": "tmp1",
+    "taskName": "my task",
+    "taskType": "IdentifierProblem"
   },
-  "callback_url": "http://127.0.0.1:3000/api/reports/"
+  "DataModel": {
+    "mesh": "DataForTests/static_hex.nas",
+    "materials": [],
+    "boundaryConditions": [ "z = 0, ux = 0;\n z = 0, uy = 0;\n z = 0, uz = 0;\n PointLoad3(0, 0, 0.01, 0, 0, -1000);" ],
+    "variables": ":ux, :uy, :uz",
+    "elementType": ":hex"
+  }
 }
 ```
 
@@ -86,6 +172,7 @@ solution = model.solve(CSparseLU)
       "body": 0
     }
   ],
+  "material": { },
   "nodalSolution": {
     "ux": [],
     "uy": [],
@@ -96,11 +183,9 @@ solution = model.solve(CSparseLU)
     "eps11": [],
     "eps22": [],
     "eps12": [],
-    "epsT": [],
     "sigma11": [],
     "sigma22": [],
     "sigma12": [],
-    "sigmaT": []
   },
   "metaData": {
     "version": "0.1.1",
@@ -111,7 +196,7 @@ solution = model.solve(CSparseLU)
 }
 ```
 
-### Идентификация материала
+### 2. Идентификация материала
 
 mode = [fast, normal, precise]
 
@@ -126,22 +211,47 @@ solution = material_identifier(material1, material2, method, mode, porosity)
 
 ```json
 {
-  "session": "tmp1",
-  "task_name": "my task",
-  "type": "IdentifierProblem",
-  "data": {
-    "material_1": {},
-    "material_2": {},
-    "method": "3-0",
-    "mode": "fast",
-    "porosity": 50
+  "ScriptInfo": {
+    "session": "tmp1",
+    "taskName": "my task",
+    "taskType": "IdentifierProblem"
   },
-  "callback_url": "http://127.0.0.1:3000/api/reports/"
+
+  "DataIdentifierProblem": {
+    "material1": {},
+    "material2": {},
+    "mode": "Faster",
+    "methodIdentifier": "ThreeOneConverter",
+    "porosity": 50,
+    "homogenisationTarget": "Elastic"
+  }
 }
 ```
 
 ```json
 {
+  "properties": {
+    "elementType": "Triangle"
+  },
+  "nodes": [
+    {
+      "id": 0,
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "nodes": [
+        2,
+        1,
+        0
+      ],
+      "body": 0
+    }
+  ],
   "material": { },
   "metaData": {
     "version": "0.1.1",
@@ -152,7 +262,7 @@ solution = material_identifier(material1, material2, method, mode, porosity)
 }
 ```
 
-### Топологическая оптимизация
+### 3. Топологическая оптимизация
 
 ```
 mesh = "http://127.0.0.1:5200/artifacts/block_mesh.nas"
@@ -168,29 +278,33 @@ boundary_conditions = ["x = 0 => ux = 0",
                        "z = 1=> phi = 100"]
 data_source = OctreeDataSource.new(2) 
 model = build_model(data_source, [body], [boundary_conditions]) 
-method = 'ESO'
-percentage = 50
+methodOptimization = 'ESO'
+percentageOptimization = 50
 senseName = 'AverageStressSense'
 solution = model.topology_optimization(method, percentage)
 ```
 
 ```json
 {
-  "session": "tmp1",
-  "taskName": "my task",
-  "type": "OptimizationProblem",
-  "data": {
-    "mesh": "http://127.0.0.1:5200/artifacts/block_mesh.nas",
-    "material": { },
-    "boundaryConditions": "x = 0, ux = 0;\n y = 0, uy = 0;\n PointLoad(0.016,0.005,0,-1000)",
-    "variables": ":ux, :uy",
-    "elementType": ":triangle",
-    "method": "ESO",
-    "percentage": 50,
-    "senseName": "AverageStressSense"
+  "ScriptInfo": {
+    "session": "tmp1",
+    "taskName": "my task",
+    "taskType": "OptimizationProblem"
   },
-  "callbackUrl": "http://127.0.0.1:3000/api/reports/"
-}
+  "DataOptimizationProblem": {
+    "DataModel": {
+      "mesh": "DataForTests/small_top_opt_mesh.nas",
+      "materials": [],
+      "boundaryConditions": [ "x = 0, ux = 0;\n x = 0, uy = 0;\n x = 0, uz = 0;\n  x = 0.016, uz = 0.0001;" ],
+      "variables": ":ux, :uy, :uz",
+      "elementType": ":hex"
+    },
+    "materialToRemoveIndex": 1,
+    "methodOptimization": "BESO",
+    "percentageOptimization": 0.5,
+    "senseName": "AverageStressSense"
+  }
+  }
 ```
 
 ```json
@@ -217,22 +331,6 @@ solution = model.topology_optimization(method, percentage)
       "body": 0
     }
   ],
-  "nodalSolution": {
-    "ux": [],
-    "uy": [],
-    "uz": [],
-    "phi": []
-  },
-  "elementalSolution": {
-    "eps11": [],
-    "eps22": [],
-    "eps12": [],
-    "epsT": [],
-    "sigma11": [],
-    "sigma22": [],
-    "sigma12": [],
-    "sigmaT": []
-  },
   "metaData": {
     "version": "0.1.1",
     "status": "Success",
@@ -242,7 +340,7 @@ solution = model.topology_optimization(method, percentage)
 }
 ```
 
-### Собственные значения модели
+### 4. Собственные значения модели
 
 ```
 mesh = "http://127.0.0.1:5200/artifacts/block_mesh.nas"
